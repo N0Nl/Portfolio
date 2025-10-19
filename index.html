@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Noni — Portfolio: Roblox builder and 3D modeling projects">
+	<title>Noni — Portfolio</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+	<header class="site-header" id="top">
+		<nav class="nav">
+			<a class="brand" href="#top">Noni</a>
+			<button id="themeToggle" class="icon-button" aria-label="Toggle theme" title="Toggle theme (T)">🌗</button>
+		</nav>
+		<div class="hero">
+			<h1 class="reveal">Hello, I’m <span class="accent">Noni</span>.</h1>
+			<p class="subtitle reveal">I’m a developer who brings whatever you say to life.</p>
+			<div class="meta reveal">
+				<span>Based in Maldives · UTC+5</span>
+			</div>
+			<div class="cta-row reveal">
+				<a href="#projects" class="button primary">See Projects</a>
+				<a href="#contact" class="button">Contact</a>
+			</div>
+		</div>
+	</header>
+
+	<main>
+		<section id="about" class="section">
+			<h2 class="reveal">About Me</h2>
+			<p class="reveal">I'm a 15‑year‑old with 1 year of building experience in Roblox Studio and 2 months in Blender. My mission is to turn your ideas into in‑game experiences.</p>
+		</section>
+
+		<section id="partner" class="section">
+			<div class="partner-section reveal">
+				<h2>Partner</h2>
+				<p class="partner-description">Check out my talented partner Saaditle!</p>
+				<a href="https://saaditle.github.io/Saaditle----Portfolio/#contact" target="_blank" rel="noopener" class="button primary partner-button">Visit Saaditle's Portfolio</a>
+			</div>
+		</section>
+
+		<section id="projects" class="section">
+			<h2 class="reveal">Past Projects</h2>
+
+			<article class="project-card reveal">
+				<header>
+					<h3>Tycoon RNG</h3>
+					<span class="badge">50M+ visits</span>
+				</header>
+				<p class="muted">Stud‑styled Tycoon game combining RNG and Tycoon with replaceable droppers, upgraders, and selling stations.</p>
+				<ul class="bullets">
+					<li>Built entire map from scratch.</li>
+					<li>Added two quest caves, a cozy tree house, and a weather machine (CSG modeling).</li>
+					<li>Completed in 4 days.</li>
+				</ul>
+				<div class="gallery">
+					<img src="https://github.com/N0Nl/N0Nl.github.io/blob/main/unnamed.png?raw=true" alt="Tycoon RNG screenshot 1">
+					<img src="https://github.com/N0Nl/N0Nl.github.io/blob/main/unnamed%20(1).png?raw=true" alt="Tycoon RNG screenshot 2">
+				</div>
+			</article>
+
+			<article class="project-card reveal">
+				<header>
+					<h3>Ball Tower Defense</h3>
+					 <span class="badge">100M+ visits</span>
+				</header>
+				<p class="muted">Stud‑style tower defense using a mix of CSG and Blender models. Use different ball‑towers to defeat the attacking squares.</p>
+				<ul class="bullets">
+					<li>Created first, second, and Lab Attack maps.</li>
+					<li>Built with a partner in 8 days.</li>
+				</ul>
+				<div class="gallery">
+					<img src="https://github.com/N0Nl/N0Nl.github.io/blob/main/image.png?raw=true" alt="Ball TD 1">
+					<img src="https://github.com/N0Nl/N0Nl.github.io/blob/main/image%20(6).png?raw=true" alt="Ball TD 2">
+					<img src="https://github.com/N0Nl/N0Nl.github.io/blob/main/image%20(5).png?raw=true" alt="Ball TD 3">
+					<img src="https://github.com/N0Nl/N0Nl.github.io/blob/main/image%20(4).png?raw=true" alt="Ball TD 4">
+					<img src="https://github.com/N0Nl/N0Nl.github.io/blob/main/image%20(2).png?raw=true" alt="Ball TD 6">
+					<img src="https://github.com/N0Nl/N0Nl.github.io/blob/main/image%20(1).png?raw=true" alt="Ball TD 7">
+				</div>
+			</article>
+		</section>
+
+		<section id="contact" class="section">
+			<h2 class="reveal">Contacts</h2>
+			<div class="contact-buttons reveal">
+				<a href="https://www.roblox.com/users/profile?username=noniponi12" target="_blank" rel="noopener" class="contact-button">
+					<span class="contact-platform">Roblox:</span>
+					<span class="contact-info">noniponi12</span>
+				</a>
+				<a href="https://discord.com/users/generallycertified" target="_blank" rel="noopener" class="contact-button">
+					<span class="contact-platform">Discord:</span>
+					<span class="contact-info">generallycertified</span>
+				</a>
+				<a href="mailto:robloxbuilder1789@gmail.com" class="contact-button">
+					<span class="contact-platform">Gmail:</span>
+					<span class="contact-info">robloxbuilder1789@gmail.com</span>
+				</a>
+			</div>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<p>© <span id="year"></span> Noni · Built with care</p>
+		<a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
+	</footer>
+
+	<div id="easter-egg" class="egg" aria-hidden="true" role="status">
+		<p>Nice! You found a secret. Press G for a gallery grid, K for Konami.</p>
+		<button id="eggClose" class="icon-button" aria-label="Close">✕</button>
+	</div>
+
+	<canvas id="confettiCanvas" aria-hidden="true"></canvas>
+
+	<script src="src/main.js" defer></script>
+</body>
+</html>
+
+
