@@ -4,8 +4,7 @@
 	const yearEl = document.getElementById('year');
 	const egg = document.getElementById('easter-egg');
 	const eggClose = document.getElementById('eggClose');
-	const confettiCanvas = document.getElementById('confettiCanvas');
-	const ctx = confettiCanvas.getContext('2d');
+	const rbxLogo = document.getElementById('rbxLogo');
 
 	// Year
 	yearEl.textContent = new Date().getFullYear();
@@ -37,107 +36,50 @@
 	}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 	for (const el of document.querySelectorAll('.reveal')) io.observe(el);
 
-	// Confetti system (simple & lightweight)
-	let confettiPieces = [];
-	function resizeCanvas() {
-		confettiCanvas.width = window.innerWidth;
-		confettiCanvas.height = window.innerHeight;
-	}
-	resizeCanvas();
-	window.addEventListener('resize', resizeCanvas);
+	// Draggable Roblox logo: show message while dragging, snap back on release
+	(function initDraggableLogo() {
+		if (!rbxLogo) return;
+		rbxLogo.setAttribute('draggable', 'false');
+		rbxLogo.style.userSelect = 'none';
+		let startX = 0, startY = 0;
+		let dx = 0, dy = 0;
+		let isDragging = false;
 
-	function spawnConfetti(x = confettiCanvas.width / 2, y = 20, amount = 200, fromCorner = false) {
-		const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff'];
-		
-		for (let i = 0; i < amount; i++) {
-			let startX, startY, velocityX, velocityY;
-			
-			if (fromCorner) {
-				// Shoot from corners at 45-degree angles
-				const corner = Math.floor(Math.random() * 4);
-				switch(corner) {
-					case 0: // Top-left
-						startX = -50;
-						startY = -50;
-						velocityX = Math.random() * 4 + 2;
-						velocityY = Math.random() * 4 + 2;
-						break;
-					case 1: // Top-right
-						startX = confettiCanvas.width + 50;
-						startY = -50;
-						velocityX = -(Math.random() * 4 + 2);
-						velocityY = Math.random() * 4 + 2;
-						break;
-					case 2: // Bottom-left
-						startX = -50;
-						startY = confettiCanvas.height + 50;
-						velocityX = Math.random() * 4 + 2;
-						velocityY = -(Math.random() * 4 + 2);
-						break;
-					case 3: // Bottom-right
-						startX = confettiCanvas.width + 50;
-						startY = confettiCanvas.height + 50;
-						velocityX = -(Math.random() * 4 + 2);
-						velocityY = -(Math.random() * 4 + 2);
-						break;
-				}
-			} else {
-				// Original center-based spawning
-				startX = x + (Math.random() - 0.5) * 120;
-				startY = y + (Math.random() - 0.5) * 40;
-				velocityX = (Math.random() - 0.5) * 3;
-				velocityY = Math.random() * 2 + 2;
-			}
-			
-			confettiPieces.push({
-				x: startX,
-				y: startY,
-				s: Math.random() * 12 + 8, // Larger size (8-20px)
-				vx: velocityX,
-				vy: velocityY,
-				rot: Math.random() * Math.PI,
-				vr: (Math.random() - 0.5) * 0.3,
-				c: colors[Math.floor(Math.random() * colors.length)],
-				life: 1.0, // Life counter for faster fade
-				fadeSpeed: 0.008 // Faster fade speed
-			});
+		function setTransform(x, y) {
+			rbxLogo.style.transform = `translate(${x}px, ${y}px)`;
 		}
-	}
 
-	function drawConfetti() {
-		ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-		for (let i = confettiPieces.length - 1; i >= 0; i--) {
-			const p = confettiPieces[i];
-			p.x += p.vx;
-			p.y += p.vy;
-			p.vy += 0.05; // Slightly faster gravity
-			p.rot += p.vr;
-			p.life -= p.fadeSpeed; // Faster fade
-			
-			// Remove particles that are off-screen or faded out
-			if (p.y > confettiCanvas.height + 40 || p.x < -50 || p.x > confettiCanvas.width + 50 || p.life <= 0) {
-				confettiPieces.splice(i, 1);
-				continue;
-			}
-			
-			ctx.save();
-			ctx.translate(p.x, p.y);
-			ctx.rotate(p.rot);
-			ctx.globalAlpha = p.life; // Apply fade
-			ctx.fillStyle = p.c;
-			ctx.fillRect(-p.s * 0.5, -p.s * 0.2, p.s, p.s * 0.4);
-			ctx.restore();
+		function onDown(clientX, clientY) {
+			isDragging = true;
+			rbxLogo.classList.add('dragging');
+			startX = clientX - dx;
+			startY = clientY - dy;
+			showEgg("You're a developer Harry!");
 		}
-		requestAnimationFrame(drawConfetti);
-	}
-	requestAnimationFrame(drawConfetti);
 
-	// Fire confetti on load from corners
-	window.addEventListener('load', () => {
-		spawnConfetti(confettiCanvas.width / 2, 40, 300, true); // Shoot from corners
-		setTimeout(() => spawnConfetti(confettiCanvas.width / 2, 40, 200, true), 200);
-		setTimeout(() => spawnConfetti(confettiCanvas.width / 2, 40, 150, true), 400);
-	});
+		function onMove(clientX, clientY) {
+			if (!isDragging) return;
+			dx = clientX - startX;
+			dy = clientY - startY;
+			setTransform(dx, dy);
+		}
+
+		function onUp() {
+			if (!isDragging) return;
+			isDragging = false;
+			rbxLogo.classList.remove('dragging');
+			dx = 0; dy = 0;
+			setTransform(0, 0);
+		}
+
+		rbxLogo.addEventListener('mousedown', (e) => { onDown(e.clientX, e.clientY); });
+		window.addEventListener('mousemove', (e) => { onMove(e.clientX, e.clientY); });
+		window.addEventListener('mouseup', onUp);
+
+		rbxLogo.addEventListener('touchstart', (e) => { const t = e.touches[0]; onDown(t.clientX, t.clientY); }, { passive: true });
+		window.addEventListener('touchmove', (e) => { const t = e.touches[0]; if (t) onMove(t.clientX, t.clientY); }, { passive: true });
+		window.addEventListener('touchend', onUp, { passive: true });
+	})();
 
 	// Sneaky drag-to-reveal easter egg
 	// Drag the brand text horizontally to fill a hidden meter; crossing threshold shows egg + confetti
@@ -152,7 +94,6 @@
 		const dx = e.clientX - startX; startX = e.clientX; dragAccum += Math.abs(dx);
 		if (dragAccum > 260) {
 			showEgg('Dragged the logo enough — secret unlocked!');
-			spawnConfetti(e.clientX, 40, 250, true);
 			dragAccum = 0; dragging = false;
 		}
 	});
@@ -172,33 +113,27 @@
 		buffer.push(e.key);
 		if (buffer.length > konami.length) buffer.shift();
 		if (konami.every((k, i) => k === buffer[i])) {
-			showEgg('Konami unlocked — turbo confetti!');
-			for (let i = 0; i < 5; i++) setTimeout(() => spawnConfetti(Math.random() * confettiCanvas.width, 20, 200, true), i * 120);
+				showEgg('Konami unlocked — enjoy!');
 		}
 	});
 
 	// G toggles gallery grid density
+	let lastGridToggle = 0;
 	document.addEventListener('keydown', (e) => {
 		if (e.key.toLowerCase() === 'g') {
+			const now = performance.now();
+			if (now - lastGridToggle < 250) return; // throttle
+			lastGridToggle = now;
 			for (const g of document.querySelectorAll('.gallery')) {
 				const dense = g.getAttribute('data-dense') === '1';
 				g.style.gridTemplateColumns = dense ? 'repeat(auto-fill, minmax(180px, 1fr))' : 'repeat(auto-fill, minmax(120px, 1fr))';
 				g.setAttribute('data-dense', dense ? '0' : '1');
 			}
 			showEgg('Gallery grid toggled');
-			spawnConfetti(confettiCanvas.width - 60, confettiCanvas.height - 80, 150, true);
 		}
-	});
+	}, { passive: true });
 
-	// Click and maybe throw confetti (10% chance)
-	document.addEventListener('click', (e) => {
-		if (Math.random() < 0.1) {
-			const r = 90; // delay ring
-			spawnConfetti(e.clientX, e.clientY, 120, true);
-			setTimeout(() => spawnConfetti(e.clientX + r, e.clientY, 80, true), 60);
-			setTimeout(() => spawnConfetti(e.clientX - r, e.clientY, 80, true), 120);
-		}
-	});
+	// Click handler intentionally left empty (confetti removed)
 })();
 
 

@@ -218,6 +218,7 @@ body {
 				transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 	filter: blur(2px);
 }
+.reveal, .project-card, .gallery img, .contact-button { will-change: transform, opacity; }
 .reveal.visible { 
 	opacity: 1; 
 	transform: translateY(0); 
@@ -247,7 +248,26 @@ body {
 }
 .egg.show { display: flex; align-items: center; gap: 8px; }
 
-#confettiCanvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
+/* removed confetti canvas */
+
+/* Draggable Roblox-style logo */
+.rbx-logo {
+	position: absolute;
+	right: 16px;
+	top: 90px;
+	width: 100px;
+	height: 100px;
+	user-select: none;
+	cursor: grab;
+	filter: drop-shadow(0 10px 30px rgba(0,0,0,0.6));
+	transition: transform .2s ease;
+}
+.rbx-logo:active { cursor: grabbing; }
+.rbx-logo.dragging { transition: none; }
+
+@media (max-width: 720px) {
+	.rbx-logo { right: 12px; top: 80px; width: 80px; height: 80px; }
+}
 
 /* Responsive */
 @media (max-width: 720px) {

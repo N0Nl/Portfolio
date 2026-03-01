@@ -39,7 +39,7 @@
 			<div class="partner-section reveal">
 				<h2>Partner</h2>
 				<p class="partner-description">Check out my talented partner Saaditle!</p>
-				<a href="https://saaditle.github.io/Saaditle----Portfolio/" target="_blank" rel="noopener" class="button primary partner-button">Visit Saaditle's Portfolio</a>
+				<a href="https://saaditle.github.io/Saaditle----Portfolio/#contact" target="_blank" rel="noopener" class="button primary partner-button">Visit Saaditle's Portfolio</a>
 			</div>
 		</section>
 
@@ -49,9 +49,12 @@
 			<article class="project-card reveal">
 				<header>
 					<h3>Tycoon RNG</h3>
-					<span class="badge">50M+ visits</span>
 				</header>
 				<p class="muted">Stud‑styled Tycoon game combining RNG and Tycoon with replaceable droppers, upgraders, and selling stations.</p>
+				<!-- Stats image placed here (under description, above bullet points) -->
+				<div class="stats-image">
+					<img src="src/images/tycoon-stats.png" alt="Tycoon RNG stats screenshot">
+				</div>
 				<ul class="bullets">
 					<li>Built entire map from scratch.</li>
 					<li>Added two quest caves, a cozy tree house, and a weather machine (CSG modeling).</li>
@@ -60,13 +63,14 @@
 				<div class="gallery">
 					<img src="https://github.com/N0Nl/N0Nl.github.io/blob/main/unnamed.png?raw=true" alt="Tycoon RNG screenshot 1">
 					<img src="https://github.com/N0Nl/N0Nl.github.io/blob/main/unnamed%20(1).png?raw=true" alt="Tycoon RNG screenshot 2">
+					<!-- Local stats image moved below the description; removed duplicate from gallery -->
 				</div>
 			</article>
 
 			<article class="project-card reveal">
 				<header>
 					<h3>Ball Tower Defense</h3>
-					 <span class="badge">100M+ visits</span>
+				
 				</header>
 				<p class="muted">Stud‑style tower defense using a mix of CSG and Blender models. Use different ball‑towers to defeat the attacking squares.</p>
 				<ul class="bullets">
@@ -113,7 +117,21 @@
 		<button id="eggClose" class="icon-button" aria-label="Close">✕</button>
 	</div>
 
-	<canvas id="confettiCanvas" aria-hidden="true"></canvas>
+	<!-- Draggable Roblox-style logo in hero -->
+	<div class="rbx-logo" id="rbxLogo" aria-label="Roblox logo" title="Drag me">
+		<!-- Simple Roblox-like diamond with a hole using SVG -->
+		<svg viewBox="0 0 100 100" width="100" height="100" aria-hidden="true">
+			<defs>
+				<mask id="hole">
+					<rect x="0" y="0" width="100" height="100" fill="white"/>
+					<rect x="43" y="43" width="14" height="14" fill="black"/>
+				</mask>
+			</defs>
+			<g transform="rotate(45 50 50)">
+				<rect x="15" y="15" width="70" height="70" fill="#000" mask="url(#hole)"/>
+			</g>
+		</svg>
+	</div>
 
 	<script src="src/main.js" defer></script>
 </body>
