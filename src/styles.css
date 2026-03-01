@@ -22,9 +22,8 @@
 }
 
 * { box-sizing: border-box; }
-html, body { height: 100%; }
+html, body { height: 100%; margin: 0; }
 body {
-	margin: 0;
 	font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 	background: radial-gradient(1200px 600px at 20% -10%, rgba(255,255,255,0.03), transparent),
 		radial-gradient(1000px 500px at 90% 10%, rgba(255,255,255,0.02), transparent),
@@ -33,11 +32,13 @@ body {
 	line-height: 1.6;
 	accent-color: var(--accent);
 }
+main { width: 100%; display: block; }
 
 .nav {
-	max-width: 1000px;
+	max-width: 1200px;
+	width: 100%;
 	margin: 0 auto;
-	padding: 20px 16px;
+	padding: 20px 32px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -63,11 +64,12 @@ body {
 
 .site-header {
 	position: relative;
+	width: 100%;
 	padding-bottom: 24px;
 	border-bottom: 1px solid var(--border);
 }
 
-.hero { max-width: 1000px; margin: 24px auto 0; padding: 0 16px 32px; }
+.hero { max-width: 1200px; width: 100%; margin: 24px auto 0; padding: 0 32px 32px; text-align: left; box-sizing: border-box; }
 .hero h1 { font-size: 44px; margin: 16px 0 8px; letter-spacing: -0.02em; }
 .accent { color: var(--accent); text-shadow: 0 0 20px color-mix(in srgb, var(--accent), transparent 70%); }
 .subtitle { color: var(--muted); margin: 0 0 10px; }
@@ -100,13 +102,21 @@ body {
 	transform: translateY(-2px);
 }
 
-.section { max-width: 1000px; margin: 40px auto; padding: 0 16px; }
-#projects { max-width: 1400px; }
-.section h2 { margin: 0 0 16px; font-size: 28px; letter-spacing: -0.01em; }
+.section { 
+	max-width: 1200px; 
+	width: 100%;
+	margin: 48px auto; 
+	padding: 0 32px; 
+	text-align: left;
+	box-sizing: border-box;
+}
+#projects { max-width: 1200px; margin: 56px auto; padding: 0 32px; }
+#projects > h2 { text-align: left; margin-bottom: 32px; font-size: 36px; }
+.section h2 { margin: 0 0 24px; font-size: 32px; letter-spacing: -0.02em; font-weight: 700; }
 
 .partner-section {
-	text-align: center;
-	padding: 32px 24px;
+	text-align: left;
+	padding: 32px 28px;
 	border: 1px solid var(--border);
 	background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
 	border-radius: 16px;
@@ -136,18 +146,20 @@ body {
 
 .project-card {
 	border: 1px solid var(--border);
-	background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-	border-radius: 16px;
-	padding: 18px;
+	background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+	border-radius: 20px;
+	padding: 28px 32px;
 	box-shadow: var(--shadow);
-	backdrop-filter: blur(6px);
-	margin-bottom: 18px;
+	backdrop-filter: blur(8px);
+	margin-bottom: 28px;
+	text-align: left;
 }
-.project-card header { display: flex; align-items: center; gap: 10px; justify-content: space-between; }
-.project-card h3 { margin: 0; font-size: 20px; }
+.project-card header { display: flex; align-items: center; gap: 12px; justify-content: space-between; margin-bottom: 4px; }
+.project-card h3 { margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
+.project-card > .muted { font-size: 16px; line-height: 1.7; margin: 0 0 16px; display: block; }
 .badge { 
 	font-size: 12px; 
-	padding: 4px 8px; 
+	padding: 4px 10px; 
 	border-radius: 999px; 
 	background: linear-gradient(135deg, #ff6b6b, #ff8e8e); 
 	border: 1px solid rgba(255,107,107,0.4); 
@@ -157,43 +169,44 @@ body {
 	box-shadow: 0 3px 10px rgba(255,107,107,0.4);
 }
 .muted { color: var(--muted); }
-.bullets { margin: 12px 0; padding-left: 18px; }
-.bullets li { margin: 6px 0; }
+.bullets { margin: 16px 0; padding-left: 24px; text-align: left; }
+.bullets li { margin: 8px 0; line-height: 1.6; }
 
 /* Stats image: contain so it doesn’t overflow; clickable for lightbox */
 .stats-image {
-	margin: 12px 0;
+	margin: 20px 0;
 	overflow: hidden;
-	border-radius: 12px;
+	border-radius: 14px;
 	border: 1px solid var(--border);
 	cursor: pointer;
-	display: inline-block;
+	display: block;
 	max-width: 100%;
+	box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 .stats-image img {
 	display: block;
 	max-width: 100%;
 	height: auto;
 	width: auto;
-	max-height: 420px;
+	max-height: 480px;
 	object-fit: contain;
 	transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
 }
 .stats-image:hover img { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,.35); filter: saturate(1.05); }
 
-.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin-top: 20px; }
 .gallery img {
-	width: 100%; height: 140px; object-fit: cover; border-radius: 12px; border: 1px solid var(--border);
+	width: 100%; height: 170px; object-fit: cover; border-radius: 14px; border: 1px solid var(--border);
 	filter: saturate(1.05) contrast(1.02);
 	transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
 	cursor: pointer;
 }
-.gallery img:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 28px rgba(0,0,0,.35); filter: saturate(1.15) contrast(1.06); }
+.gallery img:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 14px 32px rgba(0,0,0,.4); filter: saturate(1.15) contrast(1.06); }
 
 .contact-buttons {
 	display: grid;
-	gap: 12px;
-	margin-top: 16px;
+	gap: 14px;
+	margin-top: 20px;
 }
 
 .contact-button {
@@ -230,7 +243,7 @@ body {
 	font-size: 16px;
 }
 
-.site-footer { border-top: 1px solid var(--border); padding: 18px 16px; max-width: 1000px; margin: 40px auto 20px; display: flex; align-items: center; justify-content: space-between; }
+.site-footer { border-top: 1px solid var(--border); padding: 24px 32px; max-width: 1200px; width: 100%; box-sizing: border-box; margin: 48px auto 24px; display: flex; align-items: center; justify-content: space-between; }
 .back-to-top { text-decoration: none; color: var(--text); border: 1px solid var(--border); padding: 6px 10px; border-radius: 10px; background: var(--bg-elev); }
 
 /* Reveal on scroll */
@@ -352,7 +365,8 @@ body {
 }
 @media (max-width: 720px) {
 	.hero h1 { font-size: 34px; }
-	.gallery { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+	.gallery { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+	.project-card { padding: 20px 20px; }
 }
 
 

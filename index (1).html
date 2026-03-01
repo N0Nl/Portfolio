@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Noni — Portfolio: Roblox builder and 3D modeling projects">
+	<title>Noni — Portfolio</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+	<header class="site-header" id="top">
+		<nav class="nav">
+			<a class="brand" href="#top">Noni</a>
+			<button id="themeToggle" class="icon-button" aria-label="Toggle theme" title="Toggle theme (T)">🌗</button>
+		</nav>
+		<div class="hero">
+			<h1 class="reveal">Hello, I’m <span class="accent">Noni</span>.</h1>
+			<p class="subtitle reveal">I will bring what you desire into a state of reality with extreme quality</p>
+			<div class="meta reveal">
+				<span> UTC+5</span>
+			</div>
+			<div class="cta-row reveal">
+				<a href="#projects" class="button primary">See Projects</a>
+				<a href="#contact" class="button">Contact</a>
+			</div>
+		</div>
+	</header>
+
+	<main>
+		<section id="about" class="section">
+			<h2 class="reveal">About Me</h2>
+			<p class="reveal">I'm a 15‑year‑old with 2.5 years of building experience in Roblox Studio. My mission is to bring your dreams and your imagination to life.
+			I have contributed to over 272M+ visits in my time building. With the peak player count of one of my games being over 110k.</p>
+		</section>
+
+
+
+		<section id="projects" class="section">
+			<h2 class="reveal">Past Projects</h2>
+
+			<article class="project-card reveal">
+				<header>
+					<h3>Tycoon RNG</h3>
+				</header>
+				<p class="muted">Stud‑styled Tycoon game combining RNG and Tycoon with replaceable droppers, upgraders, and selling stations.</p>
+				<!-- Stats image placed here (under description, above bullet points) -->
+				<div class="stats-image">
+					<img src="src/images/tycoon-stats.png" alt="Tycoon RNG stats screenshot">
+				</div>
+				<ul class="bullets">
+					<li>Built entire map from scratch.</li>
+					<li>Added two quest caves, a cozy tree house, and a weather machine (CSG modeling).</li>
+					<li>Completed in 4 days.</li>
+				</ul>
+				<div class="gallery">
+					<img src="src/images/tycoon-1.png" alt="Tycoon RNG screenshot 1">
+					<img src="src/images/tycoon-2.png" alt="Tycoon RNG screenshot 2">
+					<img src="src/images/tycoon-3.png" alt="Tycoon RNG screenshot 3">
+				</div>
+			</article>
+
+			<article class="project-card reveal">
+				<header>
+					<h3>Ball Tower Defense</h3>
+				</header>
+				<p class="muted">Stud‑style tower defense using a mix of CSG and Blender models. Use different ball‑towers to defeat the attacking squares.</p>
+				<div class="stats-image">
+					<img src="src/images/ball-td-stats.png" alt="Ball Tower Defense stats screenshot">
+				</div>
+				<ul class="bullets">
+					<li>Created first, second, and Lab Attack maps.</li>
+					<li>Built with a partner in 8 days.</li>
+				</ul>
+				<div class="gallery">
+					<img src="src/images/ball-td-1.png" alt="Ball Tower Defense screenshot 1">
+					<img src="src/images/ball-td-2.png" alt="Ball Tower Defense screenshot 2">
+					<img src="src/images/ball-td-3.png" alt="Ball Tower Defense screenshot 3">
+				</div>
+			</article>
+
+			<article class="project-card reveal">
+				<header>
+					<h3>Steal from Brainrots</h3>
+				</header>
+				<p class="muted">A chaotic heist game where you steal from brainrot NPCs. Fast-paced, meme-inspired gameplay with unique maps and loot.</p>
+				<div class="stats-image">
+					<img src="src/images/steal-from-brainrots-stats.png" alt="Steal from Brainrots stats screenshot">
+				</div>
+				<ul class="bullets">
+					<li>Multiple heist locations and brainrot-themed characters.</li>
+					<li>Loot system with collectibles and upgrades.</li>
+				</ul>
+				<div class="gallery">
+					<img src="src/images/steal-1.png" alt="Steal from Brainrots screenshot">
+				</div>
+			</article>
+		</section>
+
+		<section id="contact" class="section">
+			<h2 class="reveal">Contacts</h2>
+			<div class="contact-buttons reveal">
+				<a href="https://www.roblox.com/users/profile?username=noniponi12" target="_blank" rel="noopener" class="contact-button">
+					<span class="contact-platform">Roblox:</span>
+					<span class="contact-info">noniponi12</span>
+				</a>
+				<a href="https://discord.com/users/1469375002020413483" target="_blank" rel="noopener" class="contact-button">
+					<span class="contact-platform">Discord:</span>
+					<span class="contact-info">certifiedgenteelman</span>
+				</a>
+				<a href="mailto:robloxbuilder1789@gmail.com" class="contact-button">
+					<span class="contact-platform">Gmail:</span>
+					<span class="contact-info">robloxbuilder1789@gmail.com</span>
+				</a>
+			</div>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<p>© <span id="year"></span> Noni · Built with care</p>
+		<a class="back-to-top" href="#top" aria-label="Back to top">↑</a>
+	</footer>
+
+	<div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="View image full size">
+		<div class="lightbox__backdrop" id="lightboxBackdrop" aria-label="Close"></div>
+		<div class="lightbox__content" id="lightboxContent">
+			<div class="lightbox__zoom-wrap" id="lightboxZoomWrap">
+				<img id="lightboxImg" src="" alt="">
+			</div>
+			<div class="lightbox__zoom-hint" id="lightboxZoomHint">Scroll to zoom · Drag to pan</div>
+		</div>
+	</div>
+
+	<div id="easter-egg" class="egg" aria-hidden="true" role="status">
+		<p>Nice! You found a secret. Press G for a gallery grid, K for Konami.</p>
+		<button id="eggClose" class="icon-button" aria-label="Close">✕</button>
+	</div>
+
+	<!-- Draggable Roblox-style logo in hero -->
+	<div class="rbx-logo" id="rbxLogo" aria-label="Roblox logo" title="Drag me">
+		<!-- Simple Roblox-like diamond with a hole using SVG -->
+		<svg viewBox="0 0 100 100" width="100" height="100" aria-hidden="true">
+			<defs>
+				<mask id="hole">
+					<rect x="0" y="0" width="100" height="100" fill="white"/>
+					<rect x="43" y="43" width="14" height="14" fill="black"/>
+				</mask>
+			</defs>
+			<g transform="rotate(45 50 50)">
+				<rect x="15" y="15" width="70" height="70" fill="#000" mask="url(#hole)"/>
+			</g>
+		</svg>
+	</div>
+
+	<script src="src/main.js" defer></script>
+</body>
+</html>
+
+
