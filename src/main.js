@@ -133,7 +133,120 @@
 		}
 	}, { passive: true });
 
-	// Click handler intentionally left empty (confetti removed)
+	// Lightbox: left-click image to open, scroll to zoom, drag to pan
+	(function initLightbox() {
+		const lightbox = document.getElementById('lightbox');
+		const lightboxBackdrop = document.getElementById('lightboxBackdrop');
+		const lightboxContent = document.getElementById('lightboxContent');
+		const lightboxZoomWrap = document.getElementById('lightboxZoomWrap');
+		const lightboxImg = document.getElementById('lightboxImg');
+		const lightboxZoomHint = document.getElementById('lightboxZoomHint');
+		if (!lightbox || !lightboxImg || !lightboxZoomWrap) return;
+
+		let scale = 1;
+		let translateX = 0;
+		let translateY = 0;
+		let isPanning = false;
+		let panStartX = 0, panStartY = 0;
+		let panStartTranslateX = 0, panStartTranslateY = 0;
+
+		function applyTransform() {
+			lightboxZoomWrap.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+		}
+
+		function resetZoom() {
+			scale = 1;
+			translateX = 0;
+			translateY = 0;
+			applyTransform();
+		}
+
+		function openLightbox(src, alt) {
+			if (!src) return;
+			lightboxImg.src = src;
+			lightboxImg.alt = alt || '';
+			resetZoom();
+			lightbox.classList.add('show');
+			lightbox.setAttribute('aria-hidden', 'false');
+			document.body.style.overflow = 'hidden';
+		}
+
+		function closeLightbox() {
+			lightbox.classList.remove('show');
+			lightbox.setAttribute('aria-hidden', 'true');
+			document.body.style.overflow = '';
+			lightboxImg.src = '';
+		}
+
+		// Left-click on gallery or stats image opens lightbox
+		document.addEventListener('click', (e) => {
+			if (e.button !== 0) return; // only left click
+			const galleryImg = e.target.closest('.gallery img');
+			const statsBlock = e.target.closest('.stats-image');
+			const img = galleryImg || (statsBlock ? statsBlock.querySelector('img') : null);
+			if (!img || !img.src) return;
+			e.preventDefault();
+			e.stopPropagation();
+			openLightbox(img.src, img.alt);
+		}, true);
+
+		lightboxBackdrop.addEventListener('click', () => closeLightbox());
+		lightboxContent.addEventListener('click', (e) => { if (e.target === lightboxContent) closeLightbox(); });
+		document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+		// Scroll to zoom (over the lightbox content)
+		lightboxContent.addEventListener('wheel', (e) => {
+			if (!lightbox.classList.contains('show')) return;
+			e.preventDefault();
+			const delta = e.deltaY > 0 ? -0.15 : 0.15;
+			scale = Math.min(5, Math.max(0.4, scale + delta));
+			applyTransform();
+		}, { passive: false });
+
+		// Drag to pan
+		lightboxContent.addEventListener('mousedown', (e) => {
+			if (e.button !== 0 || !lightbox.classList.contains('show')) return;
+			isPanning = true;
+			panStartX = e.clientX;
+			panStartY = e.clientY;
+			panStartTranslateX = translateX;
+			panStartTranslateY = translateY;
+		});
+		window.addEventListener('mousemove', (e) => {
+			if (!isPanning) return;
+			translateX = panStartTranslateX + (e.clientX - panStartX);
+			translateY = panStartTranslateY + (e.clientY - panStartY);
+			applyTransform();
+		});
+		window.addEventListener('mouseup', () => { isPanning = false; });
+
+		// Touch: pinch-zoom and pan
+		let touchStartDist = 0, touchStartScale = 1;
+		let touchStartCenterX = 0, touchStartCenterY = 0;
+		lightboxContent.addEventListener('touchstart', (e) => {
+			if (e.touches.length === 2) {
+				touchStartDist = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY);
+				touchStartScale = scale;
+			} else if (e.touches.length === 1) {
+				panStartX = e.touches[0].clientX;
+				panStartY = e.touches[0].clientY;
+				panStartTranslateX = translateX;
+				panStartTranslateY = translateY;
+			}
+		}, { passive: true });
+		lightboxContent.addEventListener('touchmove', (e) => {
+			if (e.touches.length === 2) {
+				e.preventDefault();
+				const dist = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY);
+				scale = Math.min(5, Math.max(0.4, touchStartScale * (dist / touchStartDist)));
+				applyTransform();
+			} else if (e.touches.length === 1) {
+				translateX = panStartTranslateX + (e.touches[0].clientX - panStartX);
+				translateY = panStartTranslateY + (e.touches[0].clientY - panStartY);
+				applyTransform();
+			}
+		}, { passive: false });
+	})();
 })();
 
 
